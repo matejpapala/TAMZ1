@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2. Ionic Framework</title>
+  
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"/>
+</head>
+<body>
+
+  <ion-app>
+    <ion-content class="ion-padding">
+      
+      <h2>2. AHOJ</h2>
+      <p>Ukázka použití předdefinovaných komponent.</p>
+      
+      <ion-button id="alert-trigger" expand="block">
+        Otevřít Ionic Alert
+      </ion-button>
+
+      <ion-alert
+        trigger="alert-trigger"
+        header="Informační okno"
+        sub-header="Komponenta ion-alert"
+        message="Tady bude vaše zpráva."
+      ></ion-alert>
+
+    </ion-content>
+  </ion-app>
+
+  <script>
+    // Konfigurace tlačítek v alertu
+    // Vyhledáme element <ion-alert> v DOMu
+    const alert = document.querySelector('ion-alert');
+    
+    // Přiřadíme pole řetězců do vlastnosti buttons
+    alert.buttons = ['OK', 'Zavřít'];
+  </script>
+
+</body>
+</html>

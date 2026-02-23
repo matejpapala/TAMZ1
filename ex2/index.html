@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calendar</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
+    />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"
+    ></script>
+    <link rel="stylesheet" href="src/style.css" />
+  </head>
+  <body>
+    <ion-app>
+      <ion-content class="ion-padding">
+        <div class="wrapper">
+          <div class="card-container">
+            <div class="card" id="todays-date"></div>
+
+            <div class="card">
+              <ion-text id="medium-text">Prubeh semestru:</ion-text>
+              <ion-progress-bar
+                id="semestr-progress-bar"
+                value="0"
+              ></ion-progress-bar>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Výběr data</div>
+              <ion-datetime-button datetime="my-calendar" class = "my-calendar"></ion-datetime-button>
+              <ion-modal keep-contents-mounted="true">
+                <ion-datetime
+                  id="my-calendar"
+                  presentation="date"
+                ></ion-datetime>
+              </ion-modal>
+              <ion-text id="smaller-text">Zvolene datum: DD/MM/RRRR</ion-text>
+            </div>
+            <div class = "card">
+              <ion-text id = "medium-text">Dulezita data:</ion-text>
+              <div id = "column-with-dates" class = "event-list">
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-content>
+    </ion-app>
+
+    <script src="src/main.js"></script>
+  </body>
+</html>

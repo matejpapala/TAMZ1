@@ -1,0 +1,95 @@
+ion-app {
+    background-color: #f3f4f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+ion-content {
+    --background: #f3f4f6;
+}
+
+.event-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.event-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+
+.event-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0
+}
+
+
+.event-days {
+  font-weight: 500;
+  color: #3b82f6;
+  padding-left: 12px;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 32px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1f2937;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.card-title {
+    margin-bottom: 16px;
+}
+
+.my-calendar {
+  padding-bottom: 18px;
+}
+
+#smaller-text {
+  font-size: 1rem;
+}
+
+#medium-text {
+  font-size: 1.2rem;
+  padding-bottom: 12px;
+}
+
+#todays-date {
+  font-size: 1rem;
+  padding: 16px;
+}
+
+#choose-date-header {
+  font-size: 1.2rem;
+}
