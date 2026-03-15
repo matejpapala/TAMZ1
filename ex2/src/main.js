@@ -31,7 +31,7 @@ let progres = ubehloCasu / overallTime;
 progressBar.value = progres;
 
 const udalosti = [
-  { nazev: 'Zkouška z Matiky', datum: '2026-02-25' },
+  { nazev: 'Zkouška z Matiky', datum: '2026-03-4' },
   { nazev: 'Odevzdání projektu', datum: '2026-04-10' },
   { nazev: 'Konec zkouškového', datum: '2026-06-30' }
 ];

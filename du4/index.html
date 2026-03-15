@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI Kalkulačka</title>
+  
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <ion-app>
+    
+    <div id="view-calculator" style="display: block; height: 100%;">
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title>BMI Kalkulačka</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        
+        <ion-card>
+          <ion-card-content>
+            <ion-input id="nameInput" label="Jméno" label-placement="floating" type="text" placeholder="Zadej jméno"></ion-input>
+            <ion-input id="ageInput" label="Věk" label-placement="floating" type="number" placeholder="Zadej věk"></ion-input>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-content>
+            <ion-radio-group id="genderInput" value="male">
+              <ion-item lines="none">
+                <ion-radio value="male" justify="space-between">Muž</ion-radio>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-radio value="female" justify="space-between">Žena</ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Míry</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-item lines="none">
+              <ion-range id="heightInput" min="100" max="250" value="175" pin="true" color="secondary">
+                <div slot="start">Výška (cm)</div>
+              </ion-range>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-range id="weightInput" min="30" max="150" value="70" pin="true" color="tertiary">
+                <div slot="start">Váha (kg)</div>
+              </ion-range>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-button expand="block" size="large" class="ion-margin-top" onclick="calculateBMI()">
+          Calculate BMI
+        </ion-button>
+
+        <div style="height: 80px;"></div>
+
+      </ion-content>
+    </div>
+
+    <div id="view-history" style="display: none; height: 100%;">
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title>Historie</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        
+        <ion-list id="historyList">
+          </ion-list>
+
+        <div style="height: 80px;"></div>
+
+      </ion-content>
+    </div>
+
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button onclick="switchTab('calculator')">
+        <ion-icon name="calculator-outline"></ion-icon>
+        <ion-label>Kalkulačka</ion-label>
+      </ion-tab-button>
+      <ion-tab-button onclick="switchTab('history')">
+        <ion-icon name="time-outline"></ion-icon>
+        <ion-label>Historie</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+
+    <ion-modal id="resultModal" initial-breakpoint="0.6" breakpoints="[0, 0.6, 0.85]">
+      <ion-content class="ion-padding">
+        <h2 style="text-align: center; margin-bottom: 20px;">Tvoje parametry</h2>
+        <div id="modalContent" style="font-size: 1.1rem; line-height: 1.6;"></div>
+      </ion-content>
+    </ion-modal>
+
+  </ion-app>
+
+  <script src="src/main.js"></script>
+</body>
+</html>

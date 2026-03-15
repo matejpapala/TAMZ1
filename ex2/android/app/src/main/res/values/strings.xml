@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ex2</string>
+    <string name="title_activity_main">ex2</string>
+    <string name="package_name">com.ex2</string>
+    <string name="custom_url_scheme">com.ex2</string>
+</resources>
