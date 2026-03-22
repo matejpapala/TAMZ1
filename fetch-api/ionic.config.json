@@ -1,0 +1,7 @@
+{
+  "name": "fetch-api",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
