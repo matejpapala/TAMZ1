@@ -8,6 +8,7 @@ import {
   IonInput,
   IonLabel,
   IonButton,
+  IonTextarea,
 } from "@ionic/react";
 import React, { useState } from "react";
 import "./Home.css";
@@ -17,55 +18,51 @@ const Home: React.FC = () => {
   const [url, setUrl] = useState("https://homel.vsb.cz/~mor03/TAMZ/TAMZ22.php");
   const [token, setToken] = useState("");
   const [decodedToken, setDecodedToken] = useState("");
-  const [error, setError] = useState("");
   const [secondResponse, setSecondResponse] = useState("");
+  const [joke, setJoke] = useState("Use button to get joke");
 
   const handleAuthorizedToken = async () => {
-    try {
-      setError("");
-      setSecondResponse("");
+    setSecondResponse("");
 
-      if (!decodedToken) {
-        throw new Error("First you must get your tokne");
-      }
-
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`Request failed: ${response.status}`);
-      }
-
-      const text = await response.text();
-      setSecondResponse(text);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Unkown error");
+    if (!decodedToken) {
+      throw new Error("First you must get your tokne");
     }
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed: ${response.status}`);
+    }
+
+    const text = await response.text();
+    setSecondResponse(text);
   };
 
   const handleGetToken = async () => {
-    try {
-      setError("");
-      const timestamp = Date.now();
-      const requestUrl = `${url}?user=${encodeURIComponent(username)}&timestamp=${timestamp}`;
-      const response = await fetch(requestUrl);
+    const timestamp = Date.now();
+    const requestUrl = `${url}?user=${encodeURIComponent(username)}&timestamp=${timestamp}`;
+    const response = await fetch(requestUrl);
 
-      if (!response.ok) {
-        throw new Error(`Request failed: ${response.status}`);
-      }
-
-      const text = await response.text();
-      const cleanToken = text.trim();
-
-      setToken(cleanToken);
-      setDecodedToken(atob(cleanToken));
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Unkown error");
+    if (!response.ok) {
+      throw new Error(`Request failed: ${response.status}`);
     }
+
+    const text = await response.text();
+    const cleanToken = text.trim();
+
+    setToken(cleanToken);
+    setDecodedToken(atob(cleanToken));
+  };
+
+  const getJoke = async () => {
+    const response = await fetch("https://v2.jokeapi.dev/joke/Any?format=txt");
+    const text = await response.text();
+    setJoke(text);
   };
 
   return (
@@ -108,6 +105,14 @@ const Home: React.FC = () => {
           <IonLabel position="stacked">Second response</IonLabel>
           <IonInput value={secondResponse} readonly />
         </IonItem>
+        <IonItem>
+          <h1>Joke API</h1>
+          <IonLabel position="stacked">Your joke</IonLabel>
+          <IonTextarea value={joke} readonly autoGrow />
+        </IonItem>
+        <IonButton expand="block" onClick={getJoke}>
+          Get joke
+        </IonButton>
       </IonContent>
     </IonPage>
   );
