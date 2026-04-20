@@ -1,15 +1,19 @@
-import { Text, View } from "react-native";
+import { SeedsConstants } from "@/constants/SeedsConstants";
+import { tokens } from "@/theme/tokens";
+import { ScrollView, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-export default function Index() {
+export default function HomeScreen() {
+  const insets = useSafeAreaInsets();
   return (
     <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
+      style={{ flex: 1, backgroundColor: tokens.bg0, paddingTop: insets.top }}
     >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      <ScrollView
+        style={{ flex: 1 }}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: SeedsConstants.margin24 }}
+      ></ScrollView>
     </View>
   );
 }
