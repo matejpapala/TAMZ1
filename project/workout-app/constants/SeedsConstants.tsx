@@ -1,5 +1,4 @@
 export const SeedsConstants = {
-  // Spacing (margins, paddings, gaps) — multiples of 4, min multiples of 2
   margin2: 2,
   margin4: 4,
   margin6: 6,
@@ -40,7 +39,7 @@ export const SeedsConstants = {
   lineHeight28: 28,
   lineHeight60: 60,
 
-  // Border radius — consolidated scale, all multiples of 4
+  // Border radius
   borderRadius4: 4,
   borderRadius8: 8,
   borderRadius12: 12,

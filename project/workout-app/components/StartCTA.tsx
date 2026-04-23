@@ -1,6 +1,7 @@
 import { SeedsConstants } from "@/constants/SeedsConstants";
 import { tokens } from "@/theme/tokens";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Svg, { Circle, Path, Rect } from "react-native-svg";
 
 interface StartCTAsProps {
   accent?: string;

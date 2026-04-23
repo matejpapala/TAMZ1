@@ -1,3 +1,4 @@
+import { DashboardHeader } from "@/components";
 import { SeedsConstants } from "@/constants/SeedsConstants";
 import { tokens } from "@/theme/tokens";
 import { ScrollView, View } from "react-native";
@@ -13,7 +14,9 @@ export default function HomeScreen() {
         style={{ flex: 1 }}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: SeedsConstants.margin24 }}
-      ></ScrollView>
+      >
+        <DashboardHeader userName="Matej"></DashboardHeader>
+      </ScrollView>
     </View>
   );
 }
