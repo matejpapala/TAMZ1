@@ -1,5 +1,6 @@
 import { SeedsConstants } from "@/constants/SeedsConstants";
 import { tokens } from "@/theme/tokens";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Svg, { Circle, Path, Rect } from "react-native-svg";
 
@@ -9,11 +10,8 @@ interface StartCTAsProps {
   onStartTemplate?: () => void;
 }
 
-export function StartCTAs({
-  accent = tokens.lime,
-  onStartBlank,
-  onStartTemplate,
-}: StartCTAsProps) {
+export function StartCTAs({ accent = tokens.lime, onStartBlank, onStartTemplate }: StartCTAsProps) {
+  const { t } = useTranslation();
   return (
     <View style={styles.row}>
       {/* Blank workout */}
@@ -31,42 +29,18 @@ export function StartCTAs({
       >
         <Svg width={18} height={18} viewBox="0 0 18 18" fill="none">
           <Circle cx={9} cy={9} r={7.5} stroke={tokens.bg0} strokeWidth={1.8} />
-          <Path
-            d="M9 5.5V12.5M5.5 9H12.5"
-            stroke={tokens.bg0}
-            strokeWidth={2}
-            strokeLinecap="round"
-          />
+          <Path d="M9 5.5V12.5M5.5 9H12.5" stroke={tokens.bg0} strokeWidth={2} strokeLinecap="round" />
         </Svg>
-        <Text style={[styles.primaryText, { color: tokens.bg0 }]}>
-          Blank Workout
-        </Text>
+        <Text style={[styles.primaryText, { color: tokens.bg0 }]}>{t("startCta.blank")}</Text>
       </TouchableOpacity>
 
       {/* From template */}
-      <TouchableOpacity
-        onPress={onStartTemplate}
-        activeOpacity={0.85}
-        style={[styles.button, styles.secondary]}
-      >
+      <TouchableOpacity onPress={onStartTemplate} activeOpacity={0.85} style={[styles.button, styles.secondary]}>
         <Svg width={18} height={18} viewBox="0 0 18 18" fill="none">
-          <Rect
-            x={2}
-            y={3}
-            width={14}
-            height={12}
-            rx={2.5}
-            stroke={tokens.muted2}
-            strokeWidth={1.6}
-          />
-          <Path
-            d="M5 7H13M5 10H10"
-            stroke={tokens.muted2}
-            strokeWidth={1.6}
-            strokeLinecap="round"
-          />
+          <Rect x={2} y={3} width={14} height={12} rx={2.5} stroke={tokens.muted2} strokeWidth={1.6} />
+          <Path d="M5 7H13M5 10H10" stroke={tokens.muted2} strokeWidth={1.6} strokeLinecap="round" />
         </Svg>
-        <Text style={styles.secondaryText}>From Template</Text>
+        <Text style={styles.secondaryText}>{t("startCta.template")}</Text>
       </TouchableOpacity>
     </View>
   );

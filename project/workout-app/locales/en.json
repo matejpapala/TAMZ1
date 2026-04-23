@@ -1,6 +1,14 @@
 {
   "tabs": {
     "workout": "Workout",
+    "home": "Home",
     "history": "History"
+  },
+  "dashboard": {
+    "morning": "Morning"
+  },
+  "startCta": {
+    "blank": "Blank Workout",
+    "template": "From Template"
   }
 }

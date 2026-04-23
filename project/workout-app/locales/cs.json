@@ -1,6 +1,14 @@
 {
   "tabs": {
     "workout": "Trénink",
+    "home": "Domu",
     "history": "Historie"
+  },
+  "dashboard": {
+    "morning": "Dobre rano"
+  },
+  "startCta": {
+    "blank": "Prázdný trénink",
+    "template": "Ze šablony"
   }
 }

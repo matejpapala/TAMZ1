@@ -11,11 +11,7 @@ interface ActivityCardProps {
   streakDays?: number;
 }
 
-export function ActivityCard({
-  weeks = 14,
-  accent = tokens.lime,
-  streakDays = 12,
-}: ActivityCardProps) {
+export function ActivityCard({ weeks = 14, accent = tokens.lime, streakDays = 0 }: ActivityCardProps) {
   return (
     <View style={styles.card}>
       <View style={styles.header}>

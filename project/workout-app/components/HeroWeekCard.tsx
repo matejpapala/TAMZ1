@@ -17,9 +17,9 @@ interface HeroCardProps {
 export function HeroWeekCard({
   accent = tokens.lime,
   weeklyData = [],
-  workoutsCount = 5,
-  workoutsGoal = 6,
-  streakDays = 12,
+  workoutsCount = 0,
+  workoutsGoal = 0,
+  streakDays = 0,
 }: HeroCardProps) {
   return (
     <View style={[styles.card, { borderColor: tokens.border }]}>

@@ -14,35 +14,24 @@ interface StatChipsProps {
   sectionLabel?: string;
 }
 
-export function StatChips({
-  chips,
-  sectionLabel = "This month",
-}: StatChipsProps) {
+export function StatChips({ chips, sectionLabel = "This month" }: StatChipsProps) {
   const defaultChips: StatChip[] = [
-    { label: "Workouts", value: "24", color: tokens.lime },
-    { label: "Total Sets", value: "342", color: tokens.orange },
-    { label: "Avg Time", value: "52m", color: tokens.violet },
-    { label: "Volume", value: "52k kg", color: tokens.cyan },
-    { label: "Streak", value: "12d", color: tokens.lime },
+    { label: "Workouts", value: "0", color: tokens.lime },
+    { label: "Total Sets", value: "0", color: tokens.orange },
+    { label: "Avg Time", value: "0m", color: tokens.violet },
+    { label: "Volume", value: "0 kg", color: tokens.cyan },
+    { label: "Streak", value: "0d", color: tokens.lime },
   ];
   const data = chips ?? defaultChips;
 
   return (
     <View style={{ marginTop: SeedsConstants.margin14 }}>
       <Text style={styles.sectionLabel}>{sectionLabel}</Text>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.scroll}
-      >
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.scroll}>
         {data.map((chip, i) => (
           <View key={i} style={styles.chip}>
-            <Text style={[styles.value, { color: chip.color }]}>
-              {chip.value}
-            </Text>
-            <Label style={{ marginTop: SeedsConstants.margin6, fontSize: SeedsConstants.fontSize10 }}>
-              {chip.label}
-            </Label>
+            <Text style={[styles.value, { color: chip.color }]}>{chip.value}</Text>
+            <Label style={{ marginTop: SeedsConstants.margin6, fontSize: SeedsConstants.fontSize10 }}>{chip.label}</Label>
           </View>
         ))}
       </ScrollView>

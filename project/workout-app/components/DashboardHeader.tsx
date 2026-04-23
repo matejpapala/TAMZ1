@@ -1,5 +1,6 @@
 import { SeedsConstants } from "@/constants/SeedsConstants";
 import { tokens } from "@/theme/tokens";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, Text, View } from "react-native";
 import { Label } from "./Label";
 
@@ -12,23 +13,21 @@ interface HeaderProps {
 export function DashboardHeader({
   userName,
   accent = tokens.lime,
-  date = "Sunday, Apr 20",
+  date = new Date().toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "short",
+    day: "numeric",
+  }),
 }: HeaderProps) {
+  const { t } = useTranslation();
   return (
     <View style={styles.container}>
       <View>
         <Label>{date}</Label>
-        <Text style={styles.greeting}>Morning, {userName} 👊</Text>
+        <Text style={styles.greeting}>{t("dashboard.morning")}, {userName}</Text>
       </View>
-      <View
-        style={[
-          styles.avatar,
-          { backgroundColor: accent + "33", borderColor: accent },
-        ]}
-      >
-        <Text style={[styles.avatarText, { color: accent }]}>
-          {userName[0]}
-        </Text>
+      <View style={[styles.avatar, { backgroundColor: accent + "33", borderColor: accent }]}>
+        <Text style={[styles.avatarText, { color: accent }]}>{userName[0]}</Text>
       </View>
     </View>
   );
