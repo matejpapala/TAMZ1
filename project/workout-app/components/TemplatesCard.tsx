@@ -9,7 +9,7 @@ interface TemplatesCardProps {
 }
 
 export function TemplatesCard({
-  routineCount = 5,
+  routineCount = 1,
   onPress,
 }: TemplatesCardProps) {
   return (

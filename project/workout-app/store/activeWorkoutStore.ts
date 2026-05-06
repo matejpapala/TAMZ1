@@ -11,6 +11,7 @@ interface ActiveWorkoutState {
   discardWorkout: () => void;
   buildWorkout: () => Workout;
   addExercise: (def: ExerciseDefinition) => void;
+  loadExercises: (exercises: WorkoutExercise[]) => void;
   removeExercise: (id: string) => void;
   updateExercise: (exercise: WorkoutExercise) => void;
   setExpanded: (id: string | null) => void;
@@ -21,7 +22,7 @@ const makeSet = (partial?: Partial<WorkoutSet>): WorkoutSet => ({
   id: Math.random().toString(36).slice(2),
   weight: "",
   reps: "",
-  intensity: "working",
+  rpe: 8,
   done: false,
   ...partial,
 });
@@ -68,6 +69,8 @@ export const useActiveWorkoutStore = create<ActiveWorkoutState>((set, get) => ({
     };
     set((s) => ({ exercises: [...s.exercises, exercise], expandedId: id }));
   },
+
+  loadExercises: (exercises) => set({ exercises }),
 
   removeExercise: (id) => {
     set((s) => ({ exercises: s.exercises.filter((e) => e.id !== id) }));

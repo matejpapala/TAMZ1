@@ -40,7 +40,7 @@ export function ExerciseCard({ exercise, expanded, onToggleExpand, onUpdate, onR
   const addSet = () => {
     const last = sets[sets.length - 1];
     const newSet = last
-      ? makeSet({ weight: last.weight, reps: last.reps, intensity: last.intensity })
+      ? makeSet({ weight: last.weight, reps: last.reps, rpe: last.rpe })
       : makeSet();
     onUpdate({ ...exercise, sets: [...sets, newSet] });
   };

@@ -1,13 +1,14 @@
 import { SeedsConstants } from "@/constants/SeedsConstants";
 import { tokens } from "@/theme/tokens";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Label } from "./Label";
 
 interface HeaderProps {
   userName: string;
   accent?: string;
   date?: string;
+  onAvatarPress?: () => void;
 }
 
 export function DashboardHeader({
@@ -18,6 +19,7 @@ export function DashboardHeader({
     month: "short",
     day: "numeric",
   }),
+  onAvatarPress,
 }: HeaderProps) {
   const { t } = useTranslation();
   return (
@@ -26,9 +28,14 @@ export function DashboardHeader({
         <Label>{date}</Label>
         <Text style={styles.greeting}>{t("dashboard.morning")}, {userName}</Text>
       </View>
-      <View style={[styles.avatar, { backgroundColor: accent + "33", borderColor: accent }]}>
+      <TouchableOpacity
+        onPress={onAvatarPress}
+        style={[styles.avatar, { backgroundColor: accent + "33", borderColor: accent }]}
+        accessibilityRole="button"
+        accessibilityLabel="Go to profile"
+      >
         <Text style={[styles.avatarText, { color: accent }]}>{userName[0]}</Text>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 }

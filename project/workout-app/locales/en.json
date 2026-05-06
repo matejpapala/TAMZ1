@@ -58,6 +58,10 @@
     "editWorkout": "Edit Workout",
     "addExercise": "Add Exercise"
   },
+  "templates": {
+    "title": "Templates",
+    "startWorkout": "Start Workout"
+  },
   "profile": {
     "stats": "Stats",
     "units": "Weight Unit",

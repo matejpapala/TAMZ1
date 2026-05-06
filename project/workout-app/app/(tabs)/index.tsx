@@ -75,6 +75,7 @@ export default function HomeScreen() {
   const weeklyData = useMemo(() => buildWeeklyData(workouts), [workouts]);
   const monthlyChips = useMemo(() => buildMonthlyChips(workouts, unit), [workouts, unit]);
   const weekWorkoutsCount = useMemo(() => weeklyData.reduce((s, d) => s + (d.value > 0 ? 1 : 0), 0), [weeklyData]);
+  const workoutDates = useMemo(() => workouts.map((w) => w.startedAt), [workouts]);
 
   const handleStartBlank = () => {
     startWorkout("Workout");
@@ -82,8 +83,7 @@ export default function HomeScreen() {
   };
 
   const handleStartTemplate = () => {
-    startWorkout("Workout");
-    router.push("/new-workout");
+    router.push("/templates");
   };
 
   return (
@@ -93,12 +93,15 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: SeedsConstants.margin24 }}
       >
-        <DashboardHeader userName={name || "there"} />
+        <DashboardHeader
+          userName={name || "there"}
+          onAvatarPress={() => router.push("/profile")}
+        />
         <StartCTAs onStartBlank={handleStartBlank} onStartTemplate={handleStartTemplate} />
         <HeroWeekCard weeklyData={weeklyData} workoutsCount={weekWorkoutsCount} />
         <StatChips chips={monthlyChips} sectionLabel="This month" />
-        <TemplatesCard />
-        <ActivityCard />
+        <TemplatesCard onPress={() => router.push("/templates")} />
+        <ActivityCard workoutDates={workoutDates} />
       </ScrollView>
     </View>
   );

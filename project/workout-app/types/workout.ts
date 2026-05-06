@@ -1,11 +1,10 @@
-export type IntensityLevel = "warmup" | "easy" | "working" | "hard" | "failure";
 export type WeightUnit = "kg" | "lbs";
 
 export interface WorkoutSet {
   id: string;
   weight: string;
   reps: string;
-  intensity: IntensityLevel;
+  rpe?: number;
   done: boolean;
   note?: string;
 }

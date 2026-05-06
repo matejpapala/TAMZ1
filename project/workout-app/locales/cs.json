@@ -58,6 +58,10 @@
     "editWorkout": "Upravit trénink",
     "addExercise": "Přidat cvik"
   },
+  "templates": {
+    "title": "Šablony",
+    "startWorkout": "Zahájit trénink"
+  },
   "profile": {
     "stats": "Statistiky",
     "units": "Jednotka váhy",

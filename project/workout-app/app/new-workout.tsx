@@ -73,7 +73,7 @@ export default function NewWorkoutScreen() {
         elapsed={elapsed}
         paused={paused}
         onTogglePause={() => setPaused((p) => !p)}
-        onBack={() => { if (exercises.length > 0) { setSheet("discard"); } else { handleDiscard(); } }}
+        onBack={() => setSheet("discard")}
       />
 
       <View style={styles.titleArea}>
@@ -96,6 +96,7 @@ export default function NewWorkoutScreen() {
           contentContainerStyle={styles.exerciseList}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
+          keyboardDismissMode="on-drag"
         >
           {exercises.map((ex) => (
             <ExerciseCard

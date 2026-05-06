@@ -1,9 +1,10 @@
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import { tokens } from "@/theme/tokens";
 import { SeedsConstants } from "@/constants/SeedsConstants";
-import { WorkoutSet, IntensityLevel } from "@/types/workout";
+import { WorkoutSet } from "@/types/workout";
 import { useUserStore } from "@/store/userStore";
+import { useState } from "react";
 
 interface SetRowProps {
   set: WorkoutSet;
@@ -12,15 +13,7 @@ interface SetRowProps {
   onToggle: () => void;
 }
 
-const INTENSITY_LEVELS: { key: IntensityLevel; label: string; short: string; color: string }[] = [
-  { key: "warmup",  label: "Warmup", short: "W", color: tokens.cyan },
-  { key: "easy",    label: "Easy",   short: "E", color: "#84cc16" },
-  { key: "working", label: "Working",short: "M", color: tokens.lime },
-  { key: "hard",    label: "Hard",   short: "H", color: tokens.orange },
-  { key: "failure", label: "Failure",short: "F", color: tokens.red },
-];
-
-export { INTENSITY_LEVELS };
+const RPE_VALUES = [6, 7, 8, 9, 10];
 
 interface SetHeaderProps { }
 
@@ -38,13 +31,8 @@ export function SetTableHeader(_: SetHeaderProps) {
 
 export function SetRow({ set, index, onChange, onToggle }: SetRowProps) {
   const unit = useUserStore((s) => s.unit);
-  const intensity = INTENSITY_LEVELS.find((l) => l.key === set.intensity) ?? INTENSITY_LEVELS[2];
-
-  const cycleIntensity = () => {
-    const idx = INTENSITY_LEVELS.findIndex((l) => l.key === set.intensity);
-    const next = INTENSITY_LEVELS[(idx + 1) % INTENSITY_LEVELS.length];
-    onChange({ ...set, intensity: next.key });
-  };
+  const [rpeOpen, setRpeOpen] = useState(false);
+  const rpe = set.rpe ?? 8;
 
   return (
     <View style={styles.row}>
@@ -60,6 +48,7 @@ export function SetRow({ set, index, onChange, onToggle }: SetRowProps) {
           placeholder="0"
           placeholderTextColor={tokens.muted}
           keyboardType="decimal-pad"
+          returnKeyType="done"
           accessibilityLabel={`Set ${index + 1} weight`}
         />
         <Text style={styles.inputUnit}>{unit.toUpperCase()}</Text>
@@ -73,6 +62,7 @@ export function SetRow({ set, index, onChange, onToggle }: SetRowProps) {
           placeholder="0"
           placeholderTextColor={tokens.muted}
           keyboardType="number-pad"
+          returnKeyType="done"
           accessibilityLabel={`Set ${index + 1} reps`}
         />
         <Text style={styles.inputUnit}>REPS</Text>
@@ -80,12 +70,12 @@ export function SetRow({ set, index, onChange, onToggle }: SetRowProps) {
 
       <View style={styles.rpeWrap}>
         <TouchableOpacity
-          onPress={cycleIntensity}
-          style={[styles.rpeBtn, { backgroundColor: intensity.color + "22", borderColor: intensity.color + "55" }]}
+          onPress={() => setRpeOpen(true)}
+          style={styles.rpeBtn}
           accessibilityRole="button"
-          accessibilityLabel={`Intensity: ${intensity.label}`}
+          accessibilityLabel={`RPE: ${rpe}`}
         >
-          <Text style={[styles.rpeBtnText, { color: intensity.color }]}>{intensity.short}</Text>
+          <Text style={styles.rpeBtnText}>{rpe}</Text>
         </TouchableOpacity>
         <Text style={styles.inputUnit}>RPE</Text>
       </View>
@@ -103,6 +93,27 @@ export function SetRow({ set, index, onChange, onToggle }: SetRowProps) {
           </Svg>
         )}
       </TouchableOpacity>
+
+      {rpeOpen && (
+        <Modal transparent animationType="fade" onRequestClose={() => setRpeOpen(false)}>
+          <TouchableOpacity style={styles.rpeOverlay} activeOpacity={1} onPress={() => setRpeOpen(false)}>
+            <View style={styles.rpeDropdown}>
+              <Text style={styles.rpeDropdownTitle}>RPE</Text>
+              {RPE_VALUES.map((v) => (
+                <TouchableOpacity
+                  key={v}
+                  style={[styles.rpeOption, v === rpe && styles.rpeOptionActive]}
+                  onPress={() => { onChange({ ...set, rpe: v }); setRpeOpen(false); }}
+                  accessibilityRole="button"
+                  accessibilityLabel={`RPE ${v}`}
+                >
+                  <Text style={[styles.rpeOptionText, v === rpe && { color: tokens.lime }]}>{v}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </TouchableOpacity>
+        </Modal>
+      )}
     </View>
   );
 }
@@ -134,8 +145,17 @@ const styles = StyleSheet.create({
   },
   inputUnit: { fontSize: SeedsConstants.fontSize9, color: tokens.muted, textAlign: "center", marginTop: 2, fontWeight: "600", letterSpacing: 0.5 },
   rpeWrap: { width: 28, alignItems: "center" },
-  rpeBtn: { width: 28, height: 28, borderRadius: SeedsConstants.borderRadius8, borderWidth: SeedsConstants.borderWidth1, alignItems: "center", justifyContent: "center" },
-  rpeBtnText: { fontSize: SeedsConstants.fontSize11, fontWeight: "800" },
+  rpeBtn: {
+    width: 28,
+    height: 28,
+    borderRadius: SeedsConstants.borderRadius8,
+    borderWidth: SeedsConstants.borderWidth1,
+    borderColor: tokens.border2,
+    backgroundColor: tokens.bg3,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  rpeBtnText: { fontSize: SeedsConstants.fontSize11, fontWeight: "800", color: tokens.text },
   doneBtn: {
     width: 36,
     height: 36,
@@ -145,5 +165,44 @@ const styles = StyleSheet.create({
     borderColor: tokens.border2,
     alignItems: "center",
     justifyContent: "center",
+  },
+  rpeOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.6)",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  rpeDropdown: {
+    backgroundColor: tokens.bg2,
+    borderRadius: SeedsConstants.borderRadius16,
+    borderWidth: SeedsConstants.borderWidth1,
+    borderColor: tokens.border2,
+    paddingVertical: SeedsConstants.margin8,
+    minWidth: 120,
+    overflow: "hidden",
+  },
+  rpeDropdownTitle: {
+    fontSize: SeedsConstants.fontSize9,
+    fontWeight: "700",
+    color: tokens.muted,
+    letterSpacing: 0.8,
+    textAlign: "center",
+    paddingVertical: SeedsConstants.margin8,
+    borderBottomWidth: SeedsConstants.borderWidth1,
+    borderBottomColor: tokens.border,
+    marginBottom: SeedsConstants.margin4,
+  },
+  rpeOption: {
+    paddingVertical: SeedsConstants.margin12,
+    paddingHorizontal: SeedsConstants.margin20,
+    alignItems: "center",
+  },
+  rpeOptionActive: {
+    backgroundColor: tokens.lime + "18",
+  },
+  rpeOptionText: {
+    fontSize: SeedsConstants.fontSize18,
+    fontWeight: "800",
+    color: tokens.text,
   },
 });

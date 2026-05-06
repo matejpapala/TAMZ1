@@ -6,18 +6,28 @@ import { ScrollView, View } from "react-native";
 interface HeatMapProps {
   weeks?: number;
   accent?: string;
+  workoutDates?: number[];
 }
 
-export function HeatMap({ weeks = 14, accent = tokens.lime }: HeatMapProps) {
-  const cells = useMemo(
-    () =>
-      Array.from({ length: weeks * 7 }, () => {
-        const r = Math.random();
-        return { v: r > 0.55 ? Math.ceil(r * 3) : 0 };
-      }),
-    [weeks],
-  );
-  const alpha = [0, 0.2, 0.5, 1];
+export function HeatMap({ weeks = 14, accent = tokens.lime, workoutDates = [] }: HeatMapProps) {
+  const cells = useMemo(() => {
+    const countMap = new Map<string, number>();
+    for (const ts of workoutDates) {
+      const key = new Date(ts).toDateString();
+      countMap.set(key, (countMap.get(key) ?? 0) + 1);
+    }
+
+    const now = new Date();
+    const total = weeks * 7;
+    return Array.from({ length: total }, (_, i) => {
+      const d = new Date(now);
+      d.setDate(d.getDate() - (total - 1 - i));
+      const count = countMap.get(d.toDateString()) ?? 0;
+      return { v: Math.min(count, 3) };
+    });
+  }, [weeks, workoutDates]);
+
+  const alpha = [0, 0.25, 0.6, 1];
 
   return (
     <ScrollView horizontal showsHorizontalScrollIndicator={false}>

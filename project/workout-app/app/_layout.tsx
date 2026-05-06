@@ -25,6 +25,7 @@ export default function RootLayout() {
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="new-workout" options={{ headerShown: false, animation: "slide_from_bottom" }} />
       <Stack.Screen name="workout/[id]" options={{ headerShown: false }} />
+      <Stack.Screen name="templates" options={{ headerShown: false }} />
     </Stack>
   );
 }

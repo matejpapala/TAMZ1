@@ -7,15 +7,16 @@ import { Label } from "./Label";
 interface ActivityCardProps {
   weeks?: number;
   accent?: string;
+  workoutDates?: number[];
 }
 
-export function ActivityCard({ weeks = 14, accent = tokens.lime }: ActivityCardProps) {
+export function ActivityCard({ weeks = 14, accent = tokens.lime, workoutDates = [] }: ActivityCardProps) {
   return (
     <View style={styles.card}>
       <View style={styles.header}>
         <Label>Activity · {weeks} weeks</Label>
       </View>
-      <HeatMap weeks={weeks} accent={accent} />
+      <HeatMap weeks={weeks} accent={accent} workoutDates={workoutDates} />
     </View>
   );
 }
