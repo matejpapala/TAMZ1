@@ -22,8 +22,11 @@ export const SeedsConstants = {
   fontSize11: 11,
   fontSize12: 12,
   fontSize13: 13,
+  fontSize14: 14,
   fontSize15: 15,
   fontSize16: 16,
+  fontSize18: 18,
+  fontSize20: 20,
   fontSize24: 24,
   fontSize26: 26,
   fontSize56: 56,
@@ -43,8 +46,10 @@ export const SeedsConstants = {
   borderRadius4: 4,
   borderRadius8: 8,
   borderRadius12: 12,
+  borderRadius14: 14,
   borderRadius16: 16,
   borderRadius20: 20,
+  borderRadius28: 28,
 
   // Border width
   borderWidth1: 1,

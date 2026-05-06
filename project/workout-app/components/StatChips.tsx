@@ -20,7 +20,6 @@ export function StatChips({ chips, sectionLabel = "This month" }: StatChipsProps
     { label: "Total Sets", value: "0", color: tokens.orange },
     { label: "Avg Time", value: "0m", color: tokens.violet },
     { label: "Volume", value: "0 kg", color: tokens.cyan },
-    { label: "Streak", value: "0d", color: tokens.lime },
   ];
   const data = chips ?? defaultChips;
 

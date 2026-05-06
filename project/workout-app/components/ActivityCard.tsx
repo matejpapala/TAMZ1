@@ -3,20 +3,17 @@ import { tokens } from "@/theme/tokens";
 import { StyleSheet, View } from "react-native";
 import { HeatMap } from "./HeatMap";
 import { Label } from "./Label";
-import { Pill } from "./Pill";
 
 interface ActivityCardProps {
   weeks?: number;
   accent?: string;
-  streakDays?: number;
 }
 
-export function ActivityCard({ weeks = 14, accent = tokens.lime, streakDays = 0 }: ActivityCardProps) {
+export function ActivityCard({ weeks = 14, accent = tokens.lime }: ActivityCardProps) {
   return (
     <View style={styles.card}>
       <View style={styles.header}>
         <Label>Activity · {weeks} weeks</Label>
-        <Pill label={`streak ${streakDays}`} color={accent} />
       </View>
       <HeatMap weeks={weeks} accent={accent} />
     </View>

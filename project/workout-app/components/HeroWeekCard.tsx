@@ -3,7 +3,6 @@ import { SeedsConstants } from "../constants/SeedsConstants";
 import { tokens } from "../theme/tokens";
 import { BarData } from "../types/dashboard";
 import { Label } from "./Label";
-import { Pill } from "./Pill";
 import { WeekBars } from "./WeekBars";
 
 interface HeroCardProps {
@@ -11,15 +10,13 @@ interface HeroCardProps {
   weeklyData?: BarData[];
   workoutsCount?: number;
   workoutsGoal?: number;
-  streakDays?: number;
 }
 
 export function HeroWeekCard({
   accent = tokens.lime,
   weeklyData = [],
   workoutsCount = 0,
-  workoutsGoal = 0,
-  streakDays = 0,
+  workoutsGoal = 5,
 }: HeroCardProps) {
   return (
     <View style={[styles.card, { borderColor: tokens.border }]}>
@@ -27,9 +24,6 @@ export function HeroWeekCard({
       <View style={styles.row}>
         <Text style={styles.bigNumber}>{workoutsCount}</Text>
         <Text style={styles.of}>/ {workoutsGoal} workouts</Text>
-        <View style={{ marginLeft: "auto" }}>
-          <Pill label={`🔥 ${streakDays} streak`} color={accent} />
-        </View>
       </View>
       <WeekBars data={weeklyData} accent={accent} height={SeedsConstants.weekBarHeight} />
     </View>

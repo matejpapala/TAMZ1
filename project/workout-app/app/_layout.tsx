@@ -1,46 +1,30 @@
 import "@/i18n";
-import { Tabs } from "expo-router";
-import Svg, { Circle, Path } from "react-native-svg";
-import { tokens } from "../theme/tokens";
-import { useTranslation } from "react-i18next";
+import { Stack } from "expo-router";
+import { tokens } from "@/theme/tokens";
+import { useEffect } from "react";
+import { useHistoryStore } from "@/store/historyStore";
+import { useUserStore } from "@/store/userStore";
 
-export default function TabsLayout() {
-  const { t } = useTranslation();
+export default function RootLayout() {
+  const loadWorkouts = useHistoryStore((s) => s.loadWorkouts);
+  const loadSettings = useUserStore((s) => s.loadSettings);
+
+  useEffect(() => {
+    loadWorkouts();
+    loadSettings();
+  }, []);
+
   return (
-    <Tabs
+    <Stack
       screenOptions={{
         headerShown: false,
-        tabBarStyle: {
-          backgroundColor: tokens.bg1,
-          borderTopColor: tokens.border,
-        },
-        tabBarActiveTintColor: tokens.lime,
-        tabBarInactiveTintColor: "rgba(240,240,243,0.35)",
+        contentStyle: { backgroundColor: tokens.bg0 },
+        animation: "slide_from_right",
       }}
     >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: t("tabs.home"),
-          tabBarIcon: ({ color }) => (
-            <Svg width={22} height={22} viewBox="0 0 22 22" fill="none">
-              <Path d="M3 9L11 3L19 9V19H14V14H8V19H3V9Z" stroke={color} strokeWidth={1.8} strokeLinejoin="round" />
-            </Svg>
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="history"
-        options={{
-          title: t("tabs.history"),
-          tabBarIcon: ({ color }) => (
-            <Svg width={22} height={22} viewBox="0 0 22 22" fill="none">
-              <Circle cx={11} cy={11} r={8} stroke={color} strokeWidth={1.8} />
-              <Path d="M11 7V11L14 13" stroke={color} strokeWidth={1.8} strokeLinecap="round" />
-            </Svg>
-          ),
-        }}
-      />
-    </Tabs>
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="new-workout" options={{ headerShown: false, animation: "slide_from_bottom" }} />
+      <Stack.Screen name="workout/[id]" options={{ headerShown: false }} />
+    </Stack>
   );
 }

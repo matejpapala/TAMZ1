@@ -13,6 +13,7 @@ export const tokens = {
   orange: "#f97316",
   cyan: "#67e8f9",
   violet: "#a78bfa",
+  red: "#ef4444",
 } as const;
 
 export type AccentColor = string;

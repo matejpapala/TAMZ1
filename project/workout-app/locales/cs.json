@@ -2,7 +2,8 @@
   "tabs": {
     "workout": "Trénink",
     "home": "Domu",
-    "history": "Historie"
+    "history": "Historie",
+    "profile": "Profil"
   },
   "dashboard": {
     "morning": "Dobre rano"
@@ -10,5 +11,65 @@
   "startCta": {
     "blank": "Prázdný trénink",
     "template": "Ze šablony"
+  },
+  "workout": {
+    "inProgress": "Trénink probíhá",
+    "active": "Aktivní",
+    "paused": "Pozastaveno",
+    "addExercise": "Přidat cvik",
+    "discard": "Zahodit",
+    "endWorkout": "Ukončit trénink",
+    "emptyTitle": "Připraveno 👊",
+    "emptyBody": "Klikni na Přidat cvik a zaznamenej první sérii. Časovač už běží.",
+    "set": "Série",
+    "addSet": "Přidat sérii",
+    "note": "Poznámka",
+    "restTimer": "Odpočinek",
+    "remove": "Odebrat",
+    "endTitle": "Ukončit trénink?",
+    "endBody": "Trénink bude uložen do historie.",
+    "keepGoing": "Pokračovat",
+    "saveFinish": "Uložit a dokončit",
+    "discardTitle": "Zahodit trénink?",
+    "discardBody": "Postup bude ztracen.",
+    "discardConfirm": "Zahodit",
+    "cancel": "Zrušit",
+    "duration": "Délka",
+    "sets": "Série",
+    "volume": "Objem",
+    "exercises": "Cviky",
+    "searchExercises": "Hledat cviky...",
+    "restTimerTitle": "Časovač odpočinku"
+  },
+  "history": {
+    "title": "Historie",
+    "emptyTitle": "Zatím žádné tréninky",
+    "emptyBody": "Zahaj první trénink na záložce Domu a zobrazí se zde.",
+    "exercises": "cviky",
+    "sets": "série",
+    "delete": "Smazat trénink",
+    "deleteConfirm": "Opravdu chcete smazat tento trénink?",
+    "deleteAction": "Smazat",
+    "cancel": "Zrušit",
+    "save": "Uložit změny",
+    "progress": "Postup",
+    "progressEmpty": "Zaznamenej cvik ve více trénincích pro zobrazení grafu.",
+    "progressTitle": "Váha v čase",
+    "editWorkout": "Upravit trénink",
+    "addExercise": "Přidat cvik"
+  },
+  "profile": {
+    "stats": "Statistiky",
+    "units": "Jednotka váhy",
+    "unit": "Jednotka",
+    "tapToSetName": "Klikni pro nastavení jména",
+    "tapToEdit": "Klikni pro úpravu",
+    "editName": "Upravit jméno",
+    "totalWorkouts": "Tréninky",
+    "totalSets": "Celkem sérií",
+    "totalVolume": "Objem",
+    "topExercise": "Top cvik",
+    "emptyTitle": "Zatím žádné statistiky",
+    "emptyBody": "Dokonči první trénink a statistiky se zobrazí zde."
   }
 }
