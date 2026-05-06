@@ -4,6 +4,7 @@ import { tokens } from "../theme/tokens";
 import { BarData } from "../types/dashboard";
 import { Label } from "./Label";
 import { WeekBars } from "./WeekBars";
+import { useTranslation } from "react-i18next";
 
 interface HeroCardProps {
   accent?: string;
@@ -18,12 +19,13 @@ export function HeroWeekCard({
   workoutsCount = 0,
   workoutsGoal = 5,
 }: HeroCardProps) {
+  const { t } = useTranslation();
   return (
     <View style={[styles.card, { borderColor: tokens.border }]}>
-      <Label>This week</Label>
+      <Label>{t("home.thisWeek")}</Label>
       <View style={styles.row}>
         <Text style={styles.bigNumber}>{workoutsCount}</Text>
-        <Text style={styles.of}>/ {workoutsGoal} workouts</Text>
+        <Text style={styles.of}>{t("home.workoutsGoal", { count: workoutsGoal })}</Text>
       </View>
       <WeekBars data={weeklyData} accent={accent} height={SeedsConstants.weekBarHeight} />
     </View>

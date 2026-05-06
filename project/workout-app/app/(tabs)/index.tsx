@@ -5,6 +5,7 @@ import { ScrollView, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useHistoryStore } from "@/store/historyStore";
 import { useUserStore } from "@/store/userStore";
 import { useActiveWorkoutStore } from "@/store/activeWorkoutStore";
@@ -34,7 +35,9 @@ function buildWeeklyData(workouts: Workout[]): BarData[] {
   }));
 }
 
-function buildMonthlyChips(workouts: Workout[], unit: string): StatChip[] {
+type TFunc = (key: string) => string;
+
+function buildMonthlyChips(workouts: Workout[], unit: string, t: TFunc): StatChip[] {
   const now = new Date();
   const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
 
@@ -58,22 +61,23 @@ function buildMonthlyChips(workouts: Workout[], unit: string): StatChip[] {
   const volumeLabel = displayVolume >= 1000 ? `${(displayVolume / 1000).toFixed(1)}k ${unit}` : `${displayVolume} ${unit}`;
 
   return [
-    { label: "Workouts", value: String(monthly.length), color: tokens.lime },
-    { label: "Total Sets", value: String(totalSets), color: tokens.orange },
-    { label: "Avg Time", value: `${avgMinutes}m`, color: tokens.violet },
-    { label: "Volume", value: volumeLabel, color: tokens.cyan },
+    { label: t("home.chipWorkouts"), value: String(monthly.length), color: tokens.lime },
+    { label: t("home.chipSets"), value: String(totalSets), color: tokens.orange },
+    { label: t("home.chipAvgTime"), value: `${avgMinutes}m`, color: tokens.violet },
+    { label: t("home.chipVolume"), value: volumeLabel, color: tokens.cyan },
   ];
 }
 
 export default function HomeScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  const { t } = useTranslation();
   const workouts = useHistoryStore((s) => s.workouts);
   const { name, unit } = useUserStore();
   const startWorkout = useActiveWorkoutStore((s) => s.startWorkout);
 
   const weeklyData = useMemo(() => buildWeeklyData(workouts), [workouts]);
-  const monthlyChips = useMemo(() => buildMonthlyChips(workouts, unit), [workouts, unit]);
+  const monthlyChips = useMemo(() => buildMonthlyChips(workouts, unit, t), [workouts, unit, t]);
   const weekWorkoutsCount = useMemo(() => weeklyData.reduce((s, d) => s + (d.value > 0 ? 1 : 0), 0), [weeklyData]);
   const workoutDates = useMemo(() => workouts.map((w) => w.startedAt), [workouts]);
 
@@ -99,7 +103,7 @@ export default function HomeScreen() {
         />
         <StartCTAs onStartBlank={handleStartBlank} onStartTemplate={handleStartTemplate} />
         <HeroWeekCard weeklyData={weeklyData} workoutsCount={weekWorkoutsCount} />
-        <StatChips chips={monthlyChips} sectionLabel="This month" />
+        <StatChips chips={monthlyChips} sectionLabel={t("home.thisMonth")} />
         <TemplatesCard onPress={() => router.push("/templates")} />
         <ActivityCard workoutDates={workoutDates} />
       </ScrollView>

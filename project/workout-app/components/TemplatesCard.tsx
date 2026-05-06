@@ -2,6 +2,7 @@ import { SeedsConstants } from "@/constants/SeedsConstants";
 import { tokens } from "@/theme/tokens";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Svg, { Path, Rect } from "react-native-svg";
+import { useTranslation } from "react-i18next";
 
 interface TemplatesCardProps {
   routineCount?: number;
@@ -12,6 +13,7 @@ export function TemplatesCard({
   routineCount = 1,
   onPress,
 }: TemplatesCardProps) {
+  const { t } = useTranslation();
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.8} style={styles.card}>
       <View style={styles.icon}>
@@ -34,10 +36,8 @@ export function TemplatesCard({
         </Svg>
       </View>
       <View style={{ flex: 1 }}>
-        <Text style={styles.title}>My Templates</Text>
-        <Text style={styles.sub}>
-          {routineCount} routines saved · Tap to edit
-        </Text>
+        <Text style={styles.title}>{t("home.myTemplates")}</Text>
+        <Text style={styles.sub}>{t("home.routinesSaved", { count: routineCount })}</Text>
       </View>
       <Svg width={8} height={14} viewBox="0 0 8 14" fill="none">
         <Path

@@ -3,6 +3,7 @@ import { tokens } from "@/theme/tokens";
 import { StyleSheet, View } from "react-native";
 import { HeatMap } from "./HeatMap";
 import { Label } from "./Label";
+import { useTranslation } from "react-i18next";
 
 interface ActivityCardProps {
   weeks?: number;
@@ -11,10 +12,11 @@ interface ActivityCardProps {
 }
 
 export function ActivityCard({ weeks = 14, accent = tokens.lime, workoutDates = [] }: ActivityCardProps) {
+  const { t } = useTranslation();
   return (
     <View style={styles.card}>
       <View style={styles.header}>
-        <Label>Activity · {weeks} weeks</Label>
+        <Label>{t("home.activity", { count: weeks })}</Label>
       </View>
       <HeatMap weeks={weeks} accent={accent} workoutDates={workoutDates} />
     </View>

@@ -58,6 +58,18 @@
     "editWorkout": "Edit Workout",
     "addExercise": "Add Exercise"
   },
+  "home": {
+    "thisWeek": "This week",
+    "workoutsGoal": "/ {{count}} workouts",
+    "thisMonth": "This month",
+    "chipWorkouts": "Workouts",
+    "chipSets": "Total Sets",
+    "chipAvgTime": "Avg Time",
+    "chipVolume": "Volume",
+    "myTemplates": "My Templates",
+    "routinesSaved": "{{count}} routines saved · Tap to edit",
+    "activity": "Activity · {{count}} weeks"
+  },
   "templates": {
     "title": "Templates",
     "startWorkout": "Start Workout"
@@ -69,6 +81,7 @@
     "tapToSetName": "Tap to set your name",
     "tapToEdit": "Tap to edit",
     "editName": "Edit name",
+    "language": "Language",
     "totalWorkouts": "Workouts",
     "totalSets": "Total Sets",
     "totalVolume": "Volume",

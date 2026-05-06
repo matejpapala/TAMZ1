@@ -58,6 +58,18 @@
     "editWorkout": "Upravit trénink",
     "addExercise": "Přidat cvik"
   },
+  "home": {
+    "thisWeek": "Tento týden",
+    "workoutsGoal": "/ {{count}} tréninků",
+    "thisMonth": "Tento měsíc",
+    "chipWorkouts": "Tréninky",
+    "chipSets": "Celkem sérií",
+    "chipAvgTime": "Prům. čas",
+    "chipVolume": "Objem",
+    "myTemplates": "Moje šablony",
+    "routinesSaved": "{{count}} rutin uloženo · Klikni pro úpravu",
+    "activity": "Aktivita · {{count}} týdnů"
+  },
   "templates": {
     "title": "Šablony",
     "startWorkout": "Zahájit trénink"
@@ -69,6 +81,7 @@
     "tapToSetName": "Klikni pro nastavení jména",
     "tapToEdit": "Klikni pro úpravu",
     "editName": "Upravit jméno",
+    "language": "Jazyk",
     "totalWorkouts": "Tréninky",
     "totalSets": "Celkem sérií",
     "totalVolume": "Objem",

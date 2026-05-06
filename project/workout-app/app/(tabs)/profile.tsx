@@ -46,7 +46,7 @@ function computeStats(workouts: ReturnType<typeof useHistoryStore.getState>["wor
 export default function ProfileScreen() {
   const insets = useSafeAreaInsets();
   const { t } = useTranslation();
-  const { name, unit, setName, setUnit } = useUserStore();
+  const { name, unit, language, setName, setUnit, setLanguage } = useUserStore();
   const workouts = useHistoryStore((s) => s.workouts);
   const [editingName, setEditingName] = useState(false);
   const [nameInput, setNameInput] = useState(name);
@@ -107,6 +107,23 @@ export default function ProfileScreen() {
                 accessibilityLabel={`${t("profile.unit")} ${u}`}
               >
                 <Text style={[styles.unitLabel, unit === u && styles.unitLabelActive]}>{u}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
+
+        <Label style={styles.sectionLabel}>{t("profile.language")}</Label>
+        <View style={styles.card}>
+          <View style={styles.unitRow}>
+            {[{ code: "en", label: "English" }, { code: "cs", label: "Čeština" }].map(({ code, label }) => (
+              <TouchableOpacity
+                key={code}
+                onPress={() => setLanguage(code)}
+                style={[styles.unitPill, language === code && styles.unitPillActive]}
+                accessibilityRole="button"
+                accessibilityLabel={label}
+              >
+                <Text style={[styles.unitLabel, language === code && styles.unitLabelActive]}>{label}</Text>
               </TouchableOpacity>
             ))}
           </View>
